@@ -167,7 +167,7 @@ $countData = mysqli_num_rows($queryProduk);
     </div>
   </section>
 
-  <!--Indonesia Food-->
+ 
   <section id="list" class="gallery section-padding">
     <div class="container">
       <div class="row">
@@ -176,7 +176,7 @@ $countData = mysqli_num_rows($queryProduk);
           <ul class="list-group">
 
             <?php while ($kategori = mysqli_fetch_array($queryKategori)) { ?>
-              <a class="text-decoration-none" href="home.php?kategori=<?php echo $kategori['nama']; ?>">
+              <a class="text-decoration-none" href="index.php?kategori=<?php echo $kategori['nama']; ?>">
                 <li class="list-group-item"><?php echo $kategori['nama']; ?></li>
               </a>
             <?php } ?>
@@ -201,11 +201,11 @@ $countData = mysqli_num_rows($queryProduk);
               <div class="col-md-4 mb-5 text-center">
                 <div class="card h-100">
                   <div class="image-box">
-                    <img src="admin/image/<?php echo $produk['foto']; ?>" class="card-img-top" alt="">
+                    <img src="img/<?php echo $produk['foto']; ?>" class="card-img-top" alt="">
                   </div>
                   <div class="card-body">
                     <h4 class="card-title"><?php echo $produk['nama']; ?></h4>
-                    <a href="produk-detail.php?nama=<?php echo $produk['nama']; ?>" class="btn bg-danger text-light">Detail</a>
+                    <a href="detail.php?id=<?php echo $produk['id']; ?>" class="btn bg-danger text-light">Detail</a>
                   </div>
                 </div>
               </div>

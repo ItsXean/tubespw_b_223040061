@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top no-print mb-5">
     <div class="container">
-        <a class="navbar-brand" href="#"><span class="text-danger">Lit</span>Recipe</a>
+        <a class="navbar-brand" href="index.php"><span class="text-danger">Lit</span>Recipe</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -10,7 +10,7 @@
                     <a class="nav-link" href="kategori.php">Kategori</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="produk.php">Food</a>
+                    <a class="nav-link" href="index.php">Food</a>
                 </li>
 
                 <li class="nav-item">

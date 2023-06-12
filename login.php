@@ -19,10 +19,10 @@ if (isset($_POST["submit"])) {
       $_SESSION['user'] = $user;
 
       if ($user['role'] == 'admin') {
-        echo "<script>alert('Login berhasil!'); window.location.href='admin/kategori.php';</script>";
+        echo "<script>alert('Login berhasil!'); window.location.href='admin/index.php';</script>";
         exit(); // Add this line to stop script execution after the redirect
       } else {
-        echo "<script>alert('Login berhasil!'); window.location.href='admin/kategori.php';</script>";
+        echo "<script>alert('Login berhasil!'); window.location.href='index.php';</script>";
         exit(); // Add this line to stop script execution after the redirect
       }
     } else {

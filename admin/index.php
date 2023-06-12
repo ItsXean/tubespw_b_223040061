@@ -36,7 +36,7 @@ if (isset($_GET['hapus'])) {
             })
         </script>
 
-        <meta http-equiv="refresh" content="1; url=produk.php" />
+        <meta http-equiv="refresh" content="1; url=index.php" />
 <?php
     }
 }
@@ -98,7 +98,6 @@ if (isset($_GET['hapus'])) {
                             <th>Foto</th>
                             <th>Nama</th>
                             <th>Kategori</th>
-                            <th>Harga</th>
                             <th>Action.</th>
                         </tr>
                     </thead>
@@ -117,14 +116,13 @@ if (isset($_GET['hapus'])) {
                                 <tr>
                                     <td> <?php echo $jumlah; ?></td>
                                     <td>
-                                        <img src="image/<?php echo $data['foto']; ?>" style="width: 70px;">
+                                        <img src="../img/<?php echo $data['foto']; ?>" style="width: 70px;">
                                     </td>
                                     <td> <?php echo $data['nama']; ?></td>
                                     <td> <?php echo $data['nama_kategori']; ?></td>
-                                    <td> <?php echo $data['harga']; ?></td>
                                     <td>
                                         <a href="produk-detail.php?p=<?php echo $data['id']; ?>" class="btn btn-sm btn-info">Edit</a>
-                                        <a href="produk.php?hapus=<?php echo $data['id']; ?>" class="btn btn-sm btn-danger">Hapus</a>
+                                        <a href="index.php?hapus=<?php echo $data['id']; ?>" class="btn btn-sm btn-danger">Hapus</a>
                                     </td>
                                 </tr>
                         <?php

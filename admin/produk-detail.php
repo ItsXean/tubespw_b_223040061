@@ -68,10 +68,6 @@ function generateRandomString($length = 10)
                     </select>
                 </div>
                 <div>
-                    <label for="harga">Harga</label>
-                    <input type="text" class="form-control" value="<?php echo $data['harga']; ?>" name="harga" required>
-                </div>
-                <div>
                     <label for="currentFoto">Foto Produk Sekarang</label>
                     <img src="image/<?php echo $data['foto']; ?>" alt="" width="200px">
                 </div>
@@ -80,10 +76,16 @@ function generateRandomString($length = 10)
                     <input type="file" name="foto" id="foto" class="form-control">
                 </div>
                 <div>
-                    <label for="detail">Detail</label>
-                    <textarea name="detail" id="detail" cols="30" rows="10" class="form-control">
-                    <?php echo $data['detail']; ?>
-                </textarea>
+                    <label for="bahan">Bahan-bahan</label>
+                    <textarea name="bahan" id="bahan" cols="30" rows="10" class="form-control">
+                        <?php echo stripcslashes($data['bahan']); ?>
+                    </textarea>
+                </div>
+                <div>
+                    <label for="langkah">langkah-langkah</label>
+                    <textarea name="langkah" id="langkah" cols="30" rows="10" class="form-control">
+                        <?php echo $data['langkah']; ?>
+                    </textarea>
                 </div>
                 <div CLASS="d-flex justify-content-between">
                     <button type="submit" class="btn btn-primary mt-2" name="simpan">Simpan</button>
@@ -95,10 +97,10 @@ function generateRandomString($length = 10)
             if (isset($_POST['simpan'])) {
                 $nama = htmlspecialchars($_POST['nama']);
                 $kategori = htmlspecialchars($_POST['kategori']);
-                $harga = htmlspecialchars($_POST['harga']);
-                $detail = htmlspecialchars($_POST['detail']);
+                $bahan = htmlspecialchars($_POST['bahan']);
+                $langkah = htmlspecialchars($_POST['langkah']);
 
-                $target_dir = "image/";
+                $target_dir = "../img/";
                 $nama_file = '';
                 if (isset($_FILES["foto"]["name"])) {
                     $nama_file = basename($_FILES["foto"]["name"]);
@@ -111,15 +113,14 @@ function generateRandomString($length = 10)
                 $random_name = generateRandomString(20);
                 $new_name = $random_name . "." . $imageFileType;
 
-                if ($nama == '' || $kategori == '' || $harga == '') {
+                if ($nama == '' || $kategori == '' || $bahan == '' || $langkah == '') {
             ?>
                     <div class="alert alert-warning mt-3" role="alert">
-                        Nama, Kategori dan Harga wajib di isi
+                        Nama, Kategori, Bahan dan Langkah wajib di isi
                     </div>
                     <?php
                 } else {
-                    $queryUpdate = mysqli_query($con, "UPDATE produk SET kategori_id='$kategori', nama='$nama', harga='$harga', 
-                    detail='$detail' WHERE id=$id");
+                    $queryUpdate = mysqli_query($con, "UPDATE produk SET kategori_id='$kategori', nama='$nama', bahan='$bahan', langkah='$langkah' WHERE id=$id");
 
                     if ($nama_file != '') {
                         if ($image_size > 500000) {
@@ -145,8 +146,6 @@ function generateRandomString($length = 10)
                                 <?php
                             } else {
                                 move_uploaded_file($_FILES["foto"]["tmp_name"], $target_dir . '/' . $new_name);
-
-
                                 $queryUpdate = mysqli_query($con, "UPDATE produk SET foto='$new_name' WHERE id='$id'");
 
                                 if ($queryUpdate) {
@@ -169,6 +168,17 @@ function generateRandomString($length = 10)
                             }
                         }
                     }
+                    ?>
+                    <script>
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Produk Berhasil di Ubah',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                    </script>
+                <?php
                 }
             }
 
@@ -176,7 +186,7 @@ function generateRandomString($length = 10)
                 $queryHapus = mysqli_query($con, "DELETE FROM produk WHERE id='$id'");
 
                 if ($queryHapus) {
-                    ?>
+                ?>
                     <script>
                         Swal.fire({
                             position: 'center',
@@ -187,7 +197,7 @@ function generateRandomString($length = 10)
                         })
                     </script>
 
-                    <meta http-equiv="refresh" content="2; url=produk.php" />
+                    <meta http-equiv="refresh" content="2; url=index.php" />
             <?php
                 }
             }

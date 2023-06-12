@@ -46,7 +46,7 @@ function generateRandomString($length = 10)
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active" aria-current="page">
-                    <a href="produk.php" class="text-decoration-none text-muted"><i class="fa fa-chevron-left"></i> Back</a>
+                    <a href="index.php" class="text-decoration-none text-muted"><i class="fa fa-chevron-left"></i> Back</a>
                 </li>
 
             </ol>
@@ -76,16 +76,16 @@ function generateRandomString($length = 10)
                     </select>
                 </div>
                 <div>
-                    <label for="harga">Harga</label>
-                    <input type="number" class="form-control" name="harga" required>
-                </div>
-                <div>
                     <label for="foto">Foto</label>
                     <input type="file" name="foto" id="foto" class="form-control">
                 </div>
                 <div>
-                    <label for="detail">Detail</label>
-                    <textarea name="detail" id="detail" cols="30" rows="10" class="form-control"></textarea>
+                    <label for="bahan">Bahan-bahan</label>
+                    <textarea name="bahan" id="bahan" cols="30" rows="10" class="form-control"></textarea>
+                </div>
+                <div>
+                    <label for="langkah">Langkah-langkah</label>
+                    <textarea name="langkah" id="langkah" cols="30" rows="10" class="form-control"></textarea>
                 </div>
                 <div>
                     <button type="submit" class="btn btn-primary mt-2" name="simpan">Simpan</button>
@@ -94,12 +94,12 @@ function generateRandomString($length = 10)
 
             <?php
             if (isset($_POST['simpan'])) {
-                $nama = htmlspecialchars($_POST['nama']);
+                $nama     = htmlspecialchars($_POST['nama']);
                 $kategori = htmlspecialchars($_POST['kategori']);
-                $harga = htmlspecialchars($_POST['harga']);
-                $detail = htmlspecialchars($_POST['detail']);
+                $bahan    = htmlspecialchars($_POST['bahan']);
+                $langkah  = htmlspecialchars($_POST['langkah']);
 
-                $target_dir = "image/";
+                $target_dir = "../img/";
                 $nama_file = basename($_FILES["foto"]["name"]);
                 $target_file = $target_dir . $nama_file;
                 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -107,7 +107,7 @@ function generateRandomString($length = 10)
                 $random_name = generateRandomString(20);
                 $new_name = $random_name . "." . $imageFileType;
 
-                if ($nama == '' || $kategori == '' || $harga == '') {
+                if ($nama == '' || $kategori == '' || $bahan == '' || $langkah == '') {
             ?>
                     <div class="alert alert-warning mt-3" role="alert">
                         Nama, Kategori dan Harga wajib di isi
@@ -130,16 +130,16 @@ function generateRandomString($length = 10)
                                 </div>
                         <?php
                             } else {
-                                move_uploaded_file($_FILES["foto"]["tmp_name"], $target_dir .
-                                    $new_name);
+                                move_uploaded_file($_FILES["foto"]["tmp_name"], $target_dir.$new_name);
                             }
                         }
                     }
 
                     // query insert to produk table
-                    $queryTambah = mysqli_query($con, "INSERT INTO produk (kategori_id, nama, harga, foto, detail) 
-                    VALUES ('$kategori', '$nama', '$harga', '$new_name', '$detail')");
+                    $queryTambah = mysqli_query($con, "INSERT INTO produk (kategori_id, nama, foto, bahan, langkah) 
+                    VALUES ('$kategori', '$nama', '$new_name', '$bahan', '$langkah')");
 
+var_dump($_FILES["foto"]["tmp_name"]);
                     if ($queryTambah) {
                         ?>
                         <script>
@@ -152,7 +152,7 @@ function generateRandomString($length = 10)
                             })
                         </script>
 
-                        <meta http-equiv="refresh" content="2; url=produk.php" />
+                        <meta http-equiv="refresh" content="2; url=index.php" />
             <?php
                     } else {
                         echo mysqli_error($con);
